@@ -41,10 +41,6 @@ elif PYTHON3:
 	except:
 		pass
 
-try:
-	import httplib2			# https://httplib2.readthedocs.io/en/latest/libhttplib2.html
-except:
-	httplib2=""	
 import time, datetime
 from time import sleep  # PlayVideo
 
@@ -1321,9 +1317,7 @@ def getRedirect(path, header=""):
 				PLog("PY2_give_up")
 				return path, msg
 			else:
-				if httplib2 == "":								# nicht geladen?
-					return path, msg
-				# import httplib2								# s. Modulkopf, hier häufige Kodi-Abstürze
+				import httplib2
 #				h = httplib2.Http()								# class httplib2.Http, Cache nicht erford.
 				h = httplib2.Http(cache=M3U8STORE)				# Cache: Addon-M3U8STORE
 
