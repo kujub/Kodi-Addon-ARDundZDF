@@ -10,7 +10,24 @@ CHANGE HISTORY
 			max_col 97	
 --------------
 
-
+??.07.2025 	5.2.7
+			ZDF_Kat: utf-8-Behandlung für pos2-Marker (verhindert Ausfall ZDF-
+			Kategorien bei PY2).
+			ZDF_RubrikSingle: Erweiterung für einzelne externe Beiträge (ARD) ohne 
+			direkten Quellenbezug (key cluster leer) - Nutzung Graphql-Call mittels 
+			sharingUrl (Web), neue Funktion ZDF_Graphql_Video.
+			ZDF_WebMore: nach Webänderung Austausch Blockmarker "noopener noreferrer"  
+			gegen 'data-testid="teaser-tile' (wie schon ZDF_Kat, ZDF_Kat_Plus).
+			ZDF_get_content: nicht numerische seasonNumber abgefangen (try/except).
+			ZDF_Search: Fett-/Color-Markierungen aus Titeln der Mehr-Suche entfernt.
+			ARDStartSingle: Info "keine Videoquellen gefunden" erweitert mit "Video noch
+			nicht oder nicht mehr verfügbar:".
+			ZDF_getApiStreams: router-inkompatible Zeichen aus Infotext (html, Escape-
+			Zeichen) entfernt (repl_json_chars, unescape).
+			addon.xml, Modul util: Nutzung Addon script.module.requests.
+			getRedirect (util): Umstellung httplib2 -> requests.
+			
+			
 07.07.2025 	5.2.6
 			Main_ZDF: Menü ZDFinternational entfernt (zu wenig Videos).
 			ZDF-Kategorien: nach ZDF-Änderung (3-Teilung) Anpassung in ZDF_Kat (2
