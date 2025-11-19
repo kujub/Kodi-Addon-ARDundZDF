@@ -126,6 +126,12 @@ def Main_arte(title='', summ='', descr='',href=''):
 	addDir(li=li, label=title, action="dirList", dirID="resources.lib.arte.EPG_Today", fanart=R(ICON_ARTE), 
 		thumb=R(ICON_TV), tagline=tag, fparams=fparams)
 
+	title = u"%s" % L("Arte TV-Programm gestern")
+	tag = "[B]%s[/B]" % arte_lang
+	fparams="&fparams={}"
+	addDir(li=li, label=title, action="dirList", dirID="resources.lib.arte.EPG_Yesterday", fanart=R(ICON_ARTE),
+		thumb=R(ICON_TV), tagline=tag, fparams=fparams)
+
 	tag=u'[B]%s[/B]' % L("Arte Livestream")					# Livestream-Daten
 	try:
 		title, tag, summ, img, href = get_live_data('ARTE')
@@ -279,13 +285,13 @@ def get_live_data(name):
 # TV-Programm Heute von arte.tv/de/guide/
 # 14.03.2025 OnlyNow=True -> nur Seite für get_live_data	
 #
-def EPG_Today(ID="", OnlyNow=""):
+def EPG_Offset(ID="", OnlyNow="", Offset=0):
 	PLog('EPG_Today: ID: %s, OnlyNow: %s' % (ID, OnlyNow))
 
 	arte_lang = Dict('load', "arte_lang")
 	lang = arte_lang.split("|")[1].strip()			# fr, de, ..	
 
-	now = datetime.datetime.now()
+	now = datetime.datetime.now() + datetime.timedelta(days=Offset)
 	today = now.strftime("%Y-%m-%d")				# 2023-01-16 
 	EPG_path = "https://www.arte.tv/api/rproxy/emac/v4/%s/web/pages/TV_GUIDE/?day=%s"
 	path = EPG_path % (lang, today)
@@ -398,6 +404,11 @@ def EPG_Today(ID="", OnlyNow=""):
 	
 	xbmcplugin.endOfDirectory(HANDLE, cacheToDisc=True)
 
+def EPG_Today(ID="", OnlyNow=""):
+	return EPG_Offset (ID=ID, OnlyNow=OnlyNow, Offset=0)
+
+def EPG_Yesterday(ID="", OnlyNow=""):
+	return EPG_Offset (ID=ID, OnlyNow=OnlyNow, Offset=-1)
 
 ####################################################################################################
 # arte - TV-Livestream mit akt. PRG
